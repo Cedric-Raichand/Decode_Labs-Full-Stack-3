@@ -1,18 +1,23 @@
+require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/db");
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-// Connect Database
+
 connectDB();
 
-// Middleware
+
 app.use(express.json());
 
 
-// Test route
+const userRoutes = require("./routes/users");
+
+app.use("/api/users", userRoutes);
+
+
 app.get("/", (req, res) => {
     res.send("Backend API with Database is running...");
 });
